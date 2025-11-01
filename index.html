@@ -5,7 +5,18 @@
   <title>Nghị Tuấn Lộc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https: http:; frame-src *; frame-ancestors 'self';">
-  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- DNS prefetch và preconnect cho CDN -->
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="constants/constants.js" as="script" />
+  <link rel="preload" href="utils/core.js" as="script" />
+  <link rel="preload" href="main.js" as="script" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com" defer></script>
 
   <style>
     html, body { margin:0; height:100%; overflow:hidden; background:#000; }
@@ -20,36 +31,52 @@
 <body>
   <div id="root"></div>
 
-  <script src="constants/constants.js"></script>
-  <script src="utils/core.js"></script>
-  <script src="utils/toasts.js"></script>
-  <script src="os/window/window-drag.js"></script>
-  <script src="os/window/window-resize.js"></script>
-  <script src="utils/interaction.js"></script>
-  <script src="os/window/window-element.js"></script>
-  <script src="os/window/window-interaction.js"></script>
-  <script src="os/window/window-state.js"></script>
-  <script src="os/window/window-core.js"></script>
-  <script src="os/window-manager.js"></script>
-  <script src="os/os-state.js"></script>
-  <script src="os/app-factory.js"></script>
-  <script src="os/background/overlay.js"></script>
-  <script src="os/background/bg1.js"></script>
-  <script src="os/background/bg2.js"></script>
-  <script src="os/background/bg3.js"></script>
-  <script src="os/background/bg4.js"></script>
-  <script src="os/desktop/icon-manager.js"></script>
-  <script src="os/desktop/icon-interaction.js"></script>
-  <script src="os/desktop/desktop-core.js"></script>
-  <script src="utils/welcome.js"></script>
-  <script src="os/topbar.js"></script>
-  <script src="apps/about.js"></script>
-  <script src="apps/skills.js"></script>
-  <script src="apps/projects.js"></script>
-  <script src="apps/education.js"></script>
-  <script src="apps/contact.js"></script>
-  <script src="apps/settings.js"></script>
-
-  <script src="main.js"></script>
+  <!-- Core dependencies (must load first) -->
+  <script src="constants/constants.js" defer></script>
+  <script src="utils/core.js" defer></script>
+  
+  <!-- Utilities -->
+  <script src="utils/toasts.js" defer></script>
+  <script src="utils/interaction.js" defer></script>
+  <script src="utils/welcome.js" defer></script>
+  
+  <!-- Window system (load in order) -->
+  <script src="os/window/window-state.js" defer></script>
+  <script src="os/window/window-element.js" defer></script>
+  <script src="os/window/window-drag.js" defer></script>
+  <script src="os/window/window-resize.js" defer></script>
+  <script src="os/window/window-interaction.js" defer></script>
+  <script src="os/window/window-core.js" defer></script>
+  
+  <!-- OS core -->
+  <script src="os/os-state.js" defer></script>
+  <script src="os/window-manager.js" defer></script>
+  <script src="os/app-factory.js" defer></script>
+  
+  <!-- Background animations (can load in parallel) -->
+  <script src="os/background/overlay.js" defer></script>
+  <script src="os/background/bg1.js" defer></script>
+  <script src="os/background/bg2.js" defer></script>
+  <script src="os/background/bg3.js" defer></script>
+  <script src="os/background/bg4.js" defer></script>
+  
+  <!-- Desktop components -->
+  <script src="os/desktop/icon-manager.js" defer></script>
+  <script src="os/desktop/icon-interaction.js" defer></script>
+  <script src="os/desktop/desktop-core.js" defer></script>
+  
+  <!-- UI components -->
+  <script src="os/topbar.js" defer></script>
+  
+  <!-- Apps (can load in parallel, lazy loaded when needed) -->
+  <script src="apps/about.js" defer></script>
+  <script src="apps/skills.js" defer></script>
+  <script src="apps/projects.js" defer></script>
+  <script src="apps/education.js" defer></script>
+  <script src="apps/contact.js" defer></script>
+  <script src="apps/settings.js" defer></script>
+  
+  <!-- Main application (must load last) -->
+  <script src="main.js" defer></script>
 </body>
 </html>
